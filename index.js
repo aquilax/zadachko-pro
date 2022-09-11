@@ -384,19 +384,35 @@ const getTripletsWithStartWord = (word) =>
 const startWords = getStartWords();
 const startWordsArray = [...startWords];
 
-let startWord = startWordsArray[random(startWordsArray.length - 1)];
-console.log({ startWord, startWords });
+const formatSentence = (sentence, ending) =>
+  `${sentence.charAt(0).toUpperCase() + sentence.slice(1)}${ending}`;
 
-while (startWords.has(startWord)) {
-  const triplets = getTripletsWithStartWord(startWord);
-  if (triplets.length === 0) {
-    break;
+const generateNarrative = () => {
+  const narrative = [];
+  let startWord = startWordsArray[random(startWordsArray.length - 1)];
+  console.log({ startWord, startWords });
+
+  while (startWords.has(startWord)) {
+    const triplets = getTripletsWithStartWord(startWord);
+    if (triplets.length === 0) {
+      break;
+    }
+    const triplet = triplets[random(triplets.length - 1)];
+    const fact = getFact(triplet[0], triplet[1], triplet[2], objCount, cost);
+    const question = getQuestion(triplet[2], triplet[1], triplet[0], objCount);
+    narrative.push(formatSentence(fact, "."));
+    narrative.push(formatSentence(question, "?"));
+    console.log({ fact, question });
+    startWord = triplet[2];
   }
-  const triplet = triplets[random(triplets.length - 1)];
-  const fact = getFact(triplet[0], triplet[1], triplet[2], objCount, cost);
-  const question = getQuestion(triplet[2], triplet[1], triplet[0], objCount);
-  // console.log({ fact, question });
-  console.log(fact);
-  console.log(question);
-  startWord = triplet[2];
-}
+  return narrative;
+};
+
+const $generate = document.getElementById("generate");
+const $output = document.getElementById("output");
+
+$generate.addEventListener("click", (e) => {
+  e.preventDefault();
+  const narrative = generateNarrative();
+  $output.value = narrative.join("\n");
+});
