@@ -397,6 +397,9 @@ const generateNarrative = () => {
     if (triplets.length === 0) {
       break;
     }
+    let objCount = random(15) + 1;
+    let cost = random(4) + 1;
+
     const triplet = triplets[random(triplets.length - 1)];
     const fact = getFact(triplet[0], triplet[1], triplet[2], objCount, cost);
     const question = getQuestion(triplet[2], triplet[1], triplet[0], objCount);
