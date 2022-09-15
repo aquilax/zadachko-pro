@@ -423,6 +423,7 @@ const former = [
   },
   {
     word: "пари",
+    hide: true,
     measures: ["лев", "стотинка"],
     forms: {
       singular: "пара",
