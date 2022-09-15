@@ -444,6 +444,8 @@ const former = [
   },
 ];
 
+const random = (x) => Math.ceil(Math.random() * x);
+
 const generateFact = (object, verb, subject) => `${object} ${verb} ${subject}`;
 const generateQuestion = (subject, verb, object) =>
   `колко ${subject} ${verb} ${object}`;
@@ -492,62 +494,6 @@ const getQuestion = (object, verb, subject, subjectCount) => {
   );
 };
 
-const object = "смокиня";
-const verb = "има";
-const subject = "цена";
-const objCount = 3;
-const cost = 5;
-
-const fact = getFact(object, verb, subject, objCount, cost);
-const fact2 = getFact(
-  "смокиня",
-  "произвежда",
-  "бурканче сладко",
-  objCount,
-  cost
-);
-const qObject = "смокиня";
-const qVerb = "струва";
-const qSubject = "цена";
-const qSubjectCount = 5;
-
-const question = getQuestion(qObject, qVerb, qSubject, qSubjectCount);
-const question2 = getQuestion(
-  "бурканче сладко",
-  "произвежда",
-  "смокиня",
-  qSubjectCount
-);
-
-const wantFact = "3 килограма смокини имат цена 15 лева";
-console.assert(fact === wantFact, JSON.stringify({ fact, wantFact }));
-
-const wantQuestion = "колко лева струват 5 килограма смокини";
-console.assert(
-  question === wantQuestion,
-  JSON.stringify({ question, wantQuestion })
-);
-
-const wantQuestion2 = "колко лева струват 5 килограма смокини";
-console.assert(
-  question2 === wantQuestion2,
-  JSON.stringify({ question2, wantQuestion2 })
-);
-
-console.log({ fact });
-console.log({ fact2 });
-console.log({ question });
-console.log({ question2 });
-
-const random = (x) => Math.ceil(Math.random() * x);
-
-triplets.forEach((tr) => {
-  const trFact = getFact(tr[0], tr[1], tr[2], objCount, cost);
-  const trQuestion = getQuestion(tr[2], tr[1], tr[0], objCount);
-  // console.log({ fact: trFact });
-  // console.log({ question: trQuestion });
-});
-
 const getStartWords = () => new Set(triplets.map((tr) => tr[0]));
 const getTripletsWithStartWord = (word) =>
   triplets.filter((tr) => tr[0] === word);
@@ -568,12 +514,20 @@ const generateNarrative = () => {
     if (triplets.length === 0) {
       break;
     }
-    let objCount = random(15) + 1;
-    let cost = random(4) + 1;
+    const objCount = random(15) + 1;
+    const cost = random(4) + 1;
+    const qCount = objCount + random(6) + 1;
 
     const triplet = triplets[random(triplets.length - 1)];
+
     const fact = getFact(triplet[0], triplet[1], triplet[2], objCount, cost);
-    const question = getQuestion(triplet[2], triplet[1], triplet[0], objCount);
+    const question = getQuestion(
+      triplet[2],
+      triplet[1],
+      triplet[0],
+      qCount * cost
+    );
+
     narrative.push(formatSentence(fact, "."));
     narrative.push(formatSentence(question, "?"));
     console.log({ fact, question });
@@ -582,11 +536,21 @@ const generateNarrative = () => {
   return narrative;
 };
 
-const $generate = document.getElementById("generate");
-const $output = document.getElementById("output");
+if (typeof window !== "undefined") {
+  const $generate = document.getElementById("generate");
+  const $output = document.getElementById("output");
 
-$generate.addEventListener("click", (e) => {
-  e.preventDefault();
-  const narrative = generateNarrative();
-  $output.value = narrative.join("\n");
-});
+  const fillNarative = () => {
+    const narrative = generateNarrative();
+    $output.value = narrative.join("\n");
+  };
+
+  $generate.addEventListener("click", (e) => {
+    e.preventDefault();
+    fillNarative();
+  });
+
+  fillNarative();
+} else {
+  console.log(generateNarrative());
+}
