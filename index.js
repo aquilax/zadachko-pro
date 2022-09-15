@@ -177,6 +177,7 @@ const former = [
   },
   {
     word: "време",
+    hide: true,
     measures: ["час", "минута"],
     forms: {
       singular: "време",
@@ -413,6 +414,7 @@ const former = [
   },
   {
     word: "цена",
+    hide: true,
     measures: ["лев", "стотинка"],
     forms: {
       singular: "цена",
@@ -469,11 +471,26 @@ const objectMeasure = (object, size) => {
   return pluralize(form.measures[0], size);
 };
 
-const generateObject = (object, size) =>
-  `${size} ${objectMeasure(object, size)} ${pluralize(object, size)}`;
+const showForm = (word) => {
+  const form = getForm(word);
+  return !form.hide;
+};
 
-const generateSubject = (subject, size) =>
-  `${pluralize(subject, 1)} ${size} ${objectMeasure(subject, size)}`;
+const generateObject = (object, size) => {
+  if (showForm(object)) {
+    return `${size} ${objectMeasure(object, size)} ${pluralize(object, size)}`;
+  } else {
+    return `${size} ${objectMeasure(object, size)}`;
+  }
+};
+
+const generateSubject = (subject, size) => {
+  if (showForm(subject)) {
+    return `${pluralize(subject, 1)} ${size} ${objectMeasure(subject, size)}`;
+  } else {
+    return `${size} ${objectMeasure(subject, size)}`;
+  }
+};
 
 const getFact = (object, verb, subject, objCount, cost) =>
   generateFact(
@@ -482,15 +499,33 @@ const getFact = (object, verb, subject, objCount, cost) =>
     generateSubject(subject, objCount * cost)
   );
 
+const generateQuestionSubject = (subject, objCount) => {
+  if (showForm(subject)) {
+    return `${objectMeasure(subject, objCount)} ${pluralize(
+      subject,
+      objCount
+    )}`;
+  } else {
+    return `${objectMeasure(subject, objCount)}`;
+  }
+};
+const generateQuestionObject = (object, objCount, subjectCount) => {
+  if (showForm(object)) {
+    return `${subjectCount} ${objectMeasure(object, objCount)} ${pluralize(
+      object,
+      subjectCount
+    )}`;
+  } else {
+    return `${subjectCount} ${objectMeasure(object, objCount)}`;
+  }
+};
+
 const getQuestion = (object, verb, subject, subjectCount) => {
   const objCount = 2;
   return generateQuestion(
-    `${objectMeasure(subject, objCount)} ${pluralize(subject, objCount)}`,
+    generateQuestionSubject(subject, objCount),
     pluralize(verb, objCount),
-    `${subjectCount} ${objectMeasure(object, objCount)} ${pluralize(
-      object,
-      subjectCount
-    )}`
+    generateQuestionObject(object, objCount, subjectCount)
   );
 };
 
