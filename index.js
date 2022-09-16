@@ -47,7 +47,7 @@ const former = [
   {
     word: "пълни",
     forms: {
-      singular: "пълня",
+      singular: "пълни",
       plural: "пълнят",
     },
   },
@@ -512,7 +512,7 @@ const generateQuestionSubject = (subject, objCount) => {
 };
 const generateQuestionObject = (object, objCount, subjectCount) => {
   if (showForm(object)) {
-    return `${subjectCount} ${objectMeasure(object, objCount)} ${pluralize(
+    return `${subjectCount} ${objectMeasure(object, subjectCount)} ${pluralize(
       object,
       subjectCount
     )}`;
@@ -575,10 +575,43 @@ const generateNarrative = () => {
 if (typeof window !== "undefined") {
   const $generate = document.getElementById("generate");
   const $output = document.getElementById("output");
+  const $debug = document.getElementById("debug");
 
   const fillNarative = () => {
     const narrative = generateNarrative();
     $output.value = narrative.join("\n");
+  };
+
+  const fillDebug = () => {
+    // const objCount = 1;
+    const cost = 1;
+    const qCount = 1;
+
+    const result = triplets.map((triplet) =>
+      [1, 2]
+        .map((objCount) => {
+          const narrative = [];
+          const fact = getFact(
+            triplet[0],
+            triplet[1],
+            triplet[2],
+            objCount,
+            cost
+          );
+          const question = getQuestion(
+            triplet[2],
+            triplet[1],
+            triplet[0],
+            qCount * cost
+          );
+          narrative.push(formatSentence(fact, "."));
+          narrative.push(formatSentence(question, "?"));
+          narrative.push("\n");
+          return narrative.join("\n");
+        })
+        .join("\n")
+    );
+    $debug.innerHTML = result.join("- - -\n\n");
   };
 
   $generate.addEventListener("click", (e) => {
@@ -587,6 +620,7 @@ if (typeof window !== "undefined") {
   });
 
   fillNarative();
+  fillDebug();
 } else {
   console.log(generateNarrative());
 }
