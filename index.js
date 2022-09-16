@@ -33,6 +33,38 @@ const triplets = [
   ["велосипед", "кара се", "време"],
   ["тротинетка", "кара се", "време"],
   ["влак", "движи се", "време"],
+
+  ["круша", "правя", "буркан компот"],
+  ["ябълка", "правя", "буркан компот"],
+  ["праскова", "правя", "буркан компот"],
+  ["кайсия", "правя", "буркан компот"],
+  ["слива", "правя", "буркан компот"],
+  ["малина", "правя", "буркан компот"],
+  ["ягода", "правя", "буркан компот"],
+  ["капина", "правя", "буркан компот"],
+  ["боровинка", "правя", "буркан сладко"],
+  ["смокиня", "правя", "буркан сладко"],
+  ["круша", "правя", "буркан сладко"],
+  ["ябълка", "правя", "буркан сладко"],
+  ["праскова", "правя", "буркан сладко"],
+  ["кайсия", "правя", "буркан сладко"],
+  ["слива", "правя", "буркан сладко"],
+  ["малина", "правя", "буркан сладко"],
+  ["ягода", "правя", "буркан сладко"],
+  ["капина", "правя", "буркан сладко"],
+  ["чушка", "правя", "лютеница"],
+  ["краставица", "правя", "буркан зимнина"],
+  ["домат", "правя", "лютеница"],
+  ["лист", "правя", "тетрадка"],
+  ["тетрадка", "правя", "пакет"],
+  ["кашон", "правя", "палета"],
+  ["палета", "правя", "камион"],
+  ["буркан сладко", "струва", "пари"],
+  ["буркан сладко", "тежи", "тегло"],
+  ["буркан сладко", "прави", "кашон"],
+  ["консерва", "струва", "пари"],
+  ["консерва", "тежи", "тегло"],
+  ["консерва", "прави", "кашон"],
 ];
 
 const former = [
@@ -399,10 +431,153 @@ const former = [
   },
   {
     word: "круша",
-    measures: ["килограм", "грам"],
+    measures: ["килограм", "грам", "брой"],
     forms: {
       singular: "круша",
       plural: "круши",
+    },
+  },
+  {
+    word: "пакет",
+    measures: ["брой"],
+    forms: {
+      singular: "пакет",
+      plural: "пакети",
+    },
+  },
+  {
+    word: "лист",
+    measures: ["брой"],
+    forms: {
+      singular: "лист",
+      plural: "листа",
+    },
+  },
+  {
+    word: "палета",
+    measures: ["брой"],
+    forms: {
+      singular: "палета",
+      plural: "палета",
+    },
+  },
+  {
+    word: "консерва",
+    measures: ["брой"],
+    forms: {
+      singular: "консерва",
+      plural: "консерви",
+    },
+  },
+  {
+    word: "домат",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "домат",
+      plural: "домати",
+    },
+  },
+  {
+    word: "чушка",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "чушка",
+      plural: "чушки",
+    },
+  },
+  {
+    word: "боровинка",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "боровинка",
+      plural: "боровинки",
+    },
+  },
+  {
+    word: "слива",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "слива",
+      plural: "сливи",
+    },
+  },
+  {
+    word: "капина",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "капина",
+      plural: "капини",
+    },
+  },
+  {
+    word: "ягода",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "ягода",
+      plural: "ягоди",
+    },
+  },
+  {
+    word: "малина",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "малина",
+      plural: "малини",
+    },
+  },
+  {
+    word: "кайсия",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "кайсия",
+      plural: "кайсии",
+    },
+  },
+  {
+    word: "праскова",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "праскова",
+      plural: "праскови",
+    },
+  },
+  {
+    word: "краставица",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "краставица",
+      plural: "краставици",
+    },
+  },
+  {
+    word: "краставица",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "краставица",
+      plural: "краставици",
+    },
+  },
+  {
+    word: "ябълка",
+    measures: ["килограм", "грам", "брой"],
+    forms: {
+      singular: "ябълка",
+      plural: "ябълки",
+    },
+  },
+  {
+    word: "лютеница",
+    measures: ["брой"],
+    forms: {
+      singular: "лютеница",
+      plural: "лютеници",
+    },
+  },
+  {
+    word: "тежи",
+    forms: {
+      singular: "тежи",
+      plural: "тежат",
     },
   },
   {
@@ -466,11 +641,27 @@ const former = [
     },
   },
   {
-    word: "бурканче сладко",
+    word: "буркан сладко",
     measures: ["брой"],
     forms: {
-      singular: "бурканче сладко",
-      plural: "бурканчета сладко",
+      singular: "буркан сладко",
+      plural: "буркан сладко",
+    },
+  },
+  {
+    word: "буркан зимнина",
+    measures: ["брой"],
+    forms: {
+      singular: "буркан зимнина",
+      plural: "буркан зимнина",
+    },
+  },
+  {
+    word: "тетрадка",
+    measures: ["брой"],
+    forms: {
+      singular: "тетрадка",
+      plural: "тетрадки",
     },
   },
 ];
@@ -480,6 +671,7 @@ const random = (x) => Math.ceil(Math.random() * x);
 const generateFact = (object, verb, subject) => `${object} ${verb} ${subject}`;
 const generateQuestion = (subject, verb, object) =>
   `колко ${subject} ${verb} ${object}`;
+
 const getForm = (word) => {
   result = former.find((f) => f.word === word);
   console.assert(result, `${word} missing forms`);
@@ -502,6 +694,7 @@ const objectMeasure = (object, size) => {
 
 const showForm = (word) => {
   const form = getForm(word);
+
   return !form.hide;
 };
 
@@ -600,6 +793,36 @@ const generateNarrative = () => {
   return narrative;
 };
 
+const getDebug = () => {
+  const cost = 1;
+  const qCount = 1;
+
+  return triplets.map((triplet) =>
+    [1, 2]
+      .map((objCount) => {
+        const narrative = [];
+        const fact = getFact(
+          triplet[0],
+          triplet[1],
+          triplet[2],
+          objCount,
+          cost
+        );
+        const question = getQuestion(
+          triplet[2],
+          triplet[1],
+          triplet[0],
+          qCount * cost
+        );
+        narrative.push(formatSentence(fact, "."));
+        narrative.push(formatSentence(question, "?"));
+        narrative.push("\n");
+        return narrative.join("\n");
+      })
+      .join("\n")
+  );
+};
+
 if (typeof window !== "undefined") {
   const $generate = document.getElementById("generate");
   const $output = document.getElementById("output");
@@ -611,35 +834,8 @@ if (typeof window !== "undefined") {
   };
 
   const fillDebug = () => {
-    // const objCount = 1;
-    const cost = 1;
-    const qCount = 1;
-
-    const result = triplets.map((triplet) =>
-      [1, 2]
-        .map((objCount) => {
-          const narrative = [];
-          const fact = getFact(
-            triplet[0],
-            triplet[1],
-            triplet[2],
-            objCount,
-            cost
-          );
-          const question = getQuestion(
-            triplet[2],
-            triplet[1],
-            triplet[0],
-            qCount * cost
-          );
-          narrative.push(formatSentence(fact, "."));
-          narrative.push(formatSentence(question, "?"));
-          narrative.push("\n");
-          return narrative.join("\n");
-        })
-        .join("\n")
-    );
-    $debug.innerHTML = result.join("- - -\n\n");
+    debugList = getDebug();
+    $debug.innerHTML = debugList.join("- - -\n\n");
   };
 
   $generate.addEventListener("click", (e) => {
@@ -651,4 +847,5 @@ if (typeof window !== "undefined") {
   fillDebug();
 } else {
   console.log(generateNarrative());
+  console.log(getDebug());
 }
